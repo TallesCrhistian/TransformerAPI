@@ -5,6 +5,9 @@ namespace TransformerAPI.Business.Interfaces
 {
     public interface IUserBusiness
     {
-        Task<UserDTO> Insert(UserDTO userDTO);
+        Task<UserDTO> Create(UserDTO userDTO);
+        Task<UserDTO> Update(UserDTO userDTO);
+        Task<UserDTO> Delete(int id);
+        Task<UserDTO> Read(int id);
     }
 }
