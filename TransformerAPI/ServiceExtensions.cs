@@ -17,6 +17,7 @@ namespace TransformerAPI
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<ITransformerServices, TransformerServices>();
 
             return services;
         }
@@ -24,6 +25,7 @@ namespace TransformerAPI
         public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
             services.AddScoped<IUserBusiness, UserBusiness>();
+            services.AddScoped<ITransformerBusiness, TransformerBusiness>();
 
             return services;
         }
@@ -31,6 +33,7 @@ namespace TransformerAPI
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITransformerRepository, TransformerRepository>();
 
             return services;
         }
