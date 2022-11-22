@@ -22,9 +22,9 @@ namespace TransformerAPI.Controller
         }
         [HttpPost]
         [Route(nameof(Create))]
-        public async Task<IActionResult> Create([FromBody] UserlViewModeInsert userViewModelInsert)
+        public async Task<IActionResult> Create([FromBody] UserViewModeICreate userViewModeICreate)
         {
-            UserDTO userDTO = _mapper.Map<UserDTO>(userViewModelInsert);
+            UserDTO userDTO = _mapper.Map<UserDTO>(userViewModeICreate);
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Create(userDTO);
             return Ok(serviceResponseDTO);
         }
