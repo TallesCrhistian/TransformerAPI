@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TransformerAPI.Entities\TransformerAPI.Entities.csproj" />
+    <ProjectReference Include="..\TransformerAPI.Shared\TransformerAPI.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
