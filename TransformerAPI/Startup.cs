@@ -20,11 +20,12 @@ namespace TransformerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddServices();
+            services.AddRepository();            
             services.AddBusiness();
-            services.AddRepository();
+            services.AddServices();
+            services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddSwagger();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -32,7 +33,7 @@ namespace TransformerAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trasformer.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrasformerAPI v1"));
             }
 
             app.UseHttpsRedirection();
