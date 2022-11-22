@@ -3,6 +3,7 @@ using TransformerAPI.Entities;
 using TransformerAPI.Shared.DTOs;
 using TransformerAPI.Shared.ModelView;
 using TransformerAPI.Shared.ModelView.UserModelView;
+using TransformerAPI.Shared.ViewModel.TransformerViewModel;
 using TransformerAPI.Shared.ViewModel.UserViewModel;
 
 namespace TransformerAPI.Utils.MappingProfiles
@@ -11,13 +12,22 @@ namespace TransformerAPI.Utils.MappingProfiles
     {
         public MappingProfiles()
         {
-            CreateMap<UserlViewModeInsert, UserDTO>()
+            CreateMap<UserViewModeICreate, UserDTO>()
                 .ReverseMap();
             CreateMap<UserViewModelUpdate, UserDTO>()
                 .ReverseMap();
             CreateMap<UserViewModel, UserDTO>()
                 .ReverseMap();
             CreateMap<UserDTO, User>()
+                .ReverseMap();
+
+            CreateMap<TransformerViewModelCreate, TransformerDTO>()
+                .ReverseMap();
+            CreateMap<TransformerViewModelUpdate, TransformerDTO>()
+                .ReverseMap();
+            CreateMap<TransformerViewModel, TransformerDTO>()
+                .ReverseMap();
+            CreateMap<TransformerDTO, Transformer>()
                 .ReverseMap();
         }
     }

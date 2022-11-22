@@ -2,7 +2,7 @@
 
 namespace TransformerAPI.Shared.ModelView
 {
-    public class UserlViewModeInsert : BaseViewModel
+    public class UserViewModeICreate : BaseViewModel
     {
         public string Name { get; set; }
         public string Email { get; set; }
