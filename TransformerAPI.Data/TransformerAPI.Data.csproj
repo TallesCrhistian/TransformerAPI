@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TransformerAPI.Entities\TransformerAPI.Entities.csproj" />
+    <ProjectReference Include="..\TransformerAPI.Shared\TransformerAPI.Shared.csproj" />
   </ItemGroup>
 
 </Project>
