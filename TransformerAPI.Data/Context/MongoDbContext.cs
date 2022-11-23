@@ -51,7 +51,6 @@ namespace TransformerAPI.Data.Context
                 return _database.GetCollection<Test>("Test");
             }
         }
-
     }
 }
 

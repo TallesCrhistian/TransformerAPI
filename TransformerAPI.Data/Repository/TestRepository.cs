@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using TransformerAPI.Data.Context;
+﻿using System.Threading.Tasks;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
 
@@ -8,18 +6,15 @@ namespace TransformerAPI.Data.Repository
 {
     public class TestRepository : ITestRepository
     {
-        private readonly MongoDbContext _mongoDbContext;
-        public TestRepository(MongoDbContext mongoDbContext)
+       
+        public TestRepository()
         {
-            _mongoDbContext = mongoDbContext;
+            
         }
 
-        public async Task<Test> Create(Test test)
+        public Task<Test> Create(Test test)
         {
-            test.Id = Guid.NewGuid();
-
-            _mongoDbContext.Test.InsertOne(test);
-            return test;
+            throw new System.NotImplementedException();
         }
 
         public Task<Test> Delete(int id)

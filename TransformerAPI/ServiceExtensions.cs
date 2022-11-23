@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Configuration;
@@ -18,12 +20,11 @@ namespace TransformerAPI
     {
         public static IServiceCollection AddDataBase(this IServiceCollection services, IConfiguration iConfiguration)
         {
-            services.Configure<MongoDbContext>(opt =>
-            {
-                opt.ConnectionString = iConfiguration.GetSection("MongoConnection:ConnectionString").Value;
-                opt.DatabaseName = iConfiguration.GetSection("MongoConnection:Database").Value;
-                opt.IsSSL = Convert.ToBoolean(iConfiguration.GetSection("MongoConnection:IsSSL").Value);
-            });
+            services.Configure<TransformerDatabaseSettings>(
+                iConfiguration.GetSection(nameof(TransformerDatabaseSettings)));
+
+            services.AddSingleton<ITransformerDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<TransformerDatabaseSettings>>().Value);
 
             return services;
         }
@@ -47,9 +48,9 @@ namespace TransformerAPI
 
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITransformerRepository, TransformerRepository>();
-            services.AddScoped<ITestRepository, TestRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITransformerRepository, TransformerRepository>();
+            services.AddTransient<ITestRepository, TestRepository>();
 
             return services;
         }
