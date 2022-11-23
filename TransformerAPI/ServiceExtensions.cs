@@ -2,10 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System;
+using System.Configuration;
 using TransformerAPI.Application.Interfaces;
 using TransformerAPI.Application.Services;
 using TransformerAPI.Business;
 using TransformerAPI.Business.Interfaces;
+using TransformerAPI.Data.Context;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Data.Repository;
 
@@ -13,7 +16,17 @@ namespace TransformerAPI
 {
     public static class ServiceExtensions
     {
+        public static IServiceCollection AddDataBase(this IServiceCollection services, IConfiguration iConfiguration)
+        {
+            services.Configure<MongoDbContext>(opt =>
+            {
+                opt.ConnectionString = iConfiguration.GetSection("MongoConnection:ConnectionString").Value;
+                opt.DatabaseName = iConfiguration.GetSection("MongoConnection:Database").Value;
+                opt.IsSSL = Convert.ToBoolean(iConfiguration.GetSection("MongoConnection:IsSSL").Value);
+            });
 
+            return services;
+        }
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserServices, UserServices>();
@@ -45,10 +58,10 @@ namespace TransformerAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TransformerAPI", Version = "v1" });
-                
+
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             return services;
         }
-        }
+    }
 }
