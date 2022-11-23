@@ -9,16 +9,19 @@ namespace TransformerAPI.Application.Services
     public class TestServices : ITestServices
     {
         private readonly ITestBusiness _testBusiness;
+        private readonly IReportBusiness _reportBusiness;
 
-        public TestServices(ITestBusiness testBusiness)
+        public TestServices(ITestBusiness testBusiness, IReportBusiness reportBusiness)
         {
             _testBusiness = testBusiness;
+            _reportBusiness = reportBusiness;
         }
         public async Task<ServiceResponseDTO<TestDTO>> Create(TestDTO testDTO)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = new ServiceResponseDTO<TestDTO>();
             try
             {
+                await _reportBusiness.Create(testDTO);
                 serviceResponseDTO.Dados = await _testBusiness.Create(testDTO);
             }
             catch (Exception ex)

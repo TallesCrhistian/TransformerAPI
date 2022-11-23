@@ -19,7 +19,7 @@ namespace TransformerAPI.Business
         }
         public async Task<TestDTO> Create(TestDTO testDTO)
         {
-            Test test = _mapper.Map<Test>(testDTO);
+            Test test = _mapper.Map<Test>(testDTO);            
             test = await _testRepository.Create(test);
             return _mapper.Map<TestDTO>(test);
         }
