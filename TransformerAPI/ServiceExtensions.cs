@@ -33,6 +33,8 @@ namespace TransformerAPI
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<ITransformerServices, TransformerServices>();
             services.AddScoped<ITestServices, TestServices>();
+            services.AddScoped<IReportServices, ReportServices>();
+
 
             return services;
         }
@@ -42,6 +44,7 @@ namespace TransformerAPI
             services.AddScoped<IUserBusiness, UserBusiness>();
             services.AddScoped<ITransformerBusiness, TransformerBusiness>();
             services.AddScoped<ITestBusiness, TestBusiness>();
+            services.AddScoped<IReportBusiness, ReportBusiness>();
 
             return services;
         }
@@ -51,7 +54,7 @@ namespace TransformerAPI
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITransformerRepository, TransformerRepository>();
             services.AddTransient<ITestRepository, TestRepository>();
-
+            services.AddTransient<IReportRepository, ReportRepository>();
             return services;
         }
         public static IServiceCollection AddSwagger(this IServiceCollection services)
