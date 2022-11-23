@@ -3,6 +3,7 @@ using TransformerAPI.Entities;
 using TransformerAPI.Shared.DTOs;
 using TransformerAPI.Shared.ModelView;
 using TransformerAPI.Shared.ModelView.UserModelView;
+using TransformerAPI.Shared.ViewModel.ReportViewModel;
 using TransformerAPI.Shared.ViewModel.TestViewModel;
 using TransformerAPI.Shared.ViewModel.TransformerViewModel;
 using TransformerAPI.Shared.ViewModel.UserViewModel;
@@ -38,6 +39,13 @@ namespace TransformerAPI.Utils.MappingProfiles
             CreateMap<TestViewModel, TestDTO>()
                 .ReverseMap();
             CreateMap<TestDTO, Test>()
+                .ReverseMap();
+
+            CreateMap<ReportViewModelCreate, ReportDTO>()
+               .ReverseMap();            
+            CreateMap<ReportViewModel, ReportDTO>()
+                .ReverseMap();
+            CreateMap<ReportDTO, Report>()
                 .ReverseMap();
         }
     }

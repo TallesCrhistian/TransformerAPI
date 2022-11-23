@@ -19,6 +19,8 @@ namespace TransformerAPI
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<ITransformerServices, TransformerServices>();
             services.AddScoped<ITestServices, TestServices>();
+            services.AddScoped<IReportServices, ReportServices>();
+
 
             return services;
         }
@@ -28,6 +30,7 @@ namespace TransformerAPI
             services.AddScoped<IUserBusiness, UserBusiness>();
             services.AddScoped<ITransformerBusiness, TransformerBusiness>();
             services.AddScoped<ITestBusiness, TestBusiness>();
+            services.AddScoped<IReportBusiness, ReportBusiness>();
 
             return services;
         }
@@ -37,6 +40,7 @@ namespace TransformerAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITransformerRepository, TransformerRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             return services;
         }
