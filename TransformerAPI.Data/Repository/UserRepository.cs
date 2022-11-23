@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MongoDB.Driver;
+using System.Threading.Tasks;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
 
@@ -6,9 +7,19 @@ namespace TransformerAPI.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public Task<User> Create(User user)
+        private readonly IMongoCollection<User> _mongoCollection;
+
+        public UserRepository(ITransformerDatabaseSettings transformerDatabaseSettings)
         {
-            throw new System.NotImplementedException();
+            var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
+            var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
+
+            _mongoCollection = database.GetCollection<User>(transformerDatabaseSettings.TransformerCollectionName);
+        }
+        public async Task<User> Create(User user)
+        {
+           await _mongoCollection.InsertOneAsync(user);
+            return user;
         }
 
         public Task<User> Delete(int id)

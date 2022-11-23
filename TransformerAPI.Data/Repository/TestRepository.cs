@@ -6,6 +6,12 @@ namespace TransformerAPI.Data.Repository
 {
     public class TestRepository : ITestRepository
     {
+       
+        public TestRepository()
+        {
+            
+        }
+
         public Task<Test> Create(Test test)
         {
             throw new System.NotImplementedException();
