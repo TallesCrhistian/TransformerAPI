@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using TransformerAPI.Data.Context;
 using TransformerAPI.Utils.MappingProfiles;
 
 namespace TransformerAPI
@@ -16,14 +18,14 @@ namespace TransformerAPI
         public IConfiguration _configuration { get; }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDataBase(_configuration);
             services.AddRepository();            
             services.AddBusiness();
             services.AddServices();
-            services.AddControllers();
+            services.AddControllers();            
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddSwagger();
         }
