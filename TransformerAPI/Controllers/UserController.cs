@@ -30,20 +30,20 @@ namespace TransformerAPI.Controller
         }
         [HttpPut]
         [Route(nameof(Update))]
-        public async Task<IActionResult> Update([FromBody] UserViewModelUpdate userViewModelUpdate)
+        public async Task<IActionResult> Update([FromBody] UserViewModelUpdate userViewModelUpdate, string id)
         {
             UserDTO userDTO = _mapper.Map<UserDTO>(userViewModelUpdate);
-            ServiceResponseDTO<UserDTO> ServiceResponseDTO = await _userServices.Update(userDTO);
+            ServiceResponseDTO<UserDTO> ServiceResponseDTO = await _userServices.Update(userDTO, id);
             return Ok(ServiceResponseDTO);
         }
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Delete(id);
             return Ok(serviceResponseDTO);
         }
-        [HttpPost("{id:int}")]
-        public async Task<IActionResult> ObterPorCodigo(int id)
+        [HttpPost("{id:length(24)}")]
+        public async Task<IActionResult> ObterPorCodigo(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Read(id);
             return Ok(serviceResponseDTO);
