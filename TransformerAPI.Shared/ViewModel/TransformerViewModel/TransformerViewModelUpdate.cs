@@ -1,8 +1,7 @@
 ﻿namespace TransformerAPI.Shared.ViewModel.TransformerViewModel
 {
-    public class TransformerViewModelUpdate : BaseViewModel
-    {
-        public int Id { get; set; }
+    public class TransformerViewModelUpdate
+    {        
         public string Name { get; set; }
         public double Internal_Number { get; set; }
         public string Tension_Class { get; set; }

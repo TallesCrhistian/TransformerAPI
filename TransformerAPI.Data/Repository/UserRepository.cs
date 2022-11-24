@@ -37,7 +37,7 @@ namespace TransformerAPI.Data.Repository
 
         public async Task<User> Read(string id)
         {
-            User user = _mongoCollection.Find<User>(user => user.Id == id).FirstOrDefault();
+            User user = await _mongoCollection.Find<User>(user => user.Id == id).FirstOrDefaultAsync();
             return user;
 
         }

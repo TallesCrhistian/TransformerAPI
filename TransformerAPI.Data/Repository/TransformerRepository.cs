@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MongoDB.Driver;
+using System.Threading.Tasks;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
 
@@ -6,24 +7,39 @@ namespace TransformerAPI.Data.Repository
 {
     public class TransformerRepository : ITransformerRepository
     {
-        public Task<Transformer> Create(Transformer transformer)
+        private readonly IMongoCollection<Transformer> _mongoCollection;
+
+        public TransformerRepository(ITransformerDatabaseSettings transformerDatabaseSettings)
         {
-            throw new System.NotImplementedException();
+            var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
+            var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
+
+            _mongoCollection = database.GetCollection<Transformer>(transformerDatabaseSettings.TransformerCollectionName);
+        }
+        public async Task<Transformer> Create(Transformer transformer)
+        {
+            await _mongoCollection.InsertOneAsync(transformer);
+            return transformer;
+        }
+        public async Task<Transformer> Read(string id)
+        {
+            Transformer transformer = await _mongoCollection.Find<Transformer>(transformer => transformer.Id == id).FirstOrDefaultAsync();
+            return transformer;
+        }
+        public async Task<Transformer> Update(Transformer transformer, string id)
+        {
+            await _mongoCollection.ReplaceOneAsync(user => user.Id == id, transformer);
+            return transformer;
         }
 
-        public Task<Transformer> Delete(int id)
+        public async Task<Transformer> Delete(string id)
         {
-            throw new System.NotImplementedException();
+            await _mongoCollection.DeleteOneAsync(transformer => transformer.Id == id);
+            Transformer transformer = new();
+
+            return transformer;
         }
 
-        public Task<Transformer> Read(int id)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public Task<Transformer> Update(Transformer transformer)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
