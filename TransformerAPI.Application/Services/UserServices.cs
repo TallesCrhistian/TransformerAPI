@@ -9,10 +9,12 @@ namespace TransformerAPI.Application.Services
     public class UserServices : IUserServices
     {
         private readonly IUserBusiness _userBusiness;
+
         public UserServices(IUserBusiness userBusiness)
         {
             _userBusiness = userBusiness;
         }
+
         public async Task<ServiceResponseDTO<UserDTO>> Create(UserDTO userDTO)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = new ServiceResponseDTO<UserDTO>();
@@ -42,6 +44,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
+
         public async Task<ServiceResponseDTO<UserDTO>> Delete(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = new ServiceResponseDTO<UserDTO>();
@@ -56,6 +59,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
+
         public async Task<ServiceResponseDTO<UserDTO>> Read(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = new ServiceResponseDTO<UserDTO>();

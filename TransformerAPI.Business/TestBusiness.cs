@@ -19,24 +19,25 @@ namespace TransformerAPI.Business
         }
         public async Task<TestDTO> Create(TestDTO testDTO)
         {
-            Test test = _mapper.Map<Test>(testDTO);            
+            Test test = _mapper.Map<Test>(testDTO);
             test = await _testRepository.Create(test);
             return _mapper.Map<TestDTO>(test);
         }
 
-        public async Task<TestDTO> Update(TestDTO testDTO)
+        public async Task<TestDTO> Update(TestDTO testDTO, string id)
         {
             Test test = _mapper.Map<Test>(testDTO);
-            test = await _testRepository.Update(test);
+            test.Id = id;
+            test = await _testRepository.Update(test, id);
             return _mapper.Map<TestDTO>(test);
         }
-        public async Task<TestDTO> Delete(int id)
+        public async Task<TestDTO> Delete(string id)
         {
             Test test = await _testRepository.Delete(id);
             TestDTO testDTO = (test != null) ? _mapper.Map<TestDTO>(test) : new TestDTO();
             return testDTO;
         }
-        public async Task<TestDTO> Read(int id)
+        public async Task<TestDTO> Read(string id)
         {
             Test test = await _testRepository.Read(id);
             TestDTO testDTO = (test != null) ? _mapper.Map<TestDTO>(test) : new TestDTO();
