@@ -29,12 +29,12 @@ namespace TransformerAPI.Application.Services
             return serviceResponseDTO;
         }
 
-        public async Task<ServiceResponseDTO<TransformerDTO>> Update(TransformerDTO transformerDTO)
+        public async Task<ServiceResponseDTO<TransformerDTO>> Update(TransformerDTO transformerDTO, string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();
             try
             {
-                serviceResponseDTO.Dados = await _transformerBusiness.Update(transformerDTO);
+                serviceResponseDTO.Dados = await _transformerBusiness.Update(transformerDTO, id);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
-        public async Task<ServiceResponseDTO<TransformerDTO>> Delete(int id)
+        public async Task<ServiceResponseDTO<TransformerDTO>> Delete(string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();
             try
@@ -57,7 +57,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
-        public async Task<ServiceResponseDTO<TransformerDTO>> Read(int id)
+        public async Task<ServiceResponseDTO<TransformerDTO>> Read(string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();
             try

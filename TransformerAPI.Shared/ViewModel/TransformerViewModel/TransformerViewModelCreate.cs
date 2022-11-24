@@ -1,6 +1,6 @@
 ﻿namespace TransformerAPI.Shared.ViewModel.TransformerViewModel
 {
-    public class TransformerViewModelCreate : BaseViewModel
+    public class TransformerViewModelCreate
     {
         public string Name { get; set; }
         public double Internal_Number { get; set; }
