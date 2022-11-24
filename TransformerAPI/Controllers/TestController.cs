@@ -27,24 +27,27 @@ namespace TransformerAPI.Controllers
             ServiceResponseDTO<TestDTO> serviceResponseDTO = await _testServices.Create(testDTO);
             return Ok(serviceResponseDTO);
         }
-        [HttpPut]
-        [Route(nameof(Update))]
-        public async Task<IActionResult> Update([FromBody] TestViewModelUpdate testViewModelUpdate)
-        {
-            TestDTO testDTO = _mapper.Map<TestDTO>(testViewModelUpdate);
-            ServiceResponseDTO<TestDTO> ServiceResponseDTO = await _testServices.Update(testDTO);
-            return Ok(ServiceResponseDTO);
-        }
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            ServiceResponseDTO<TestDTO> serviceResponseDTO = await _testServices.Delete(id);
-            return Ok(serviceResponseDTO);
-        }
-        [HttpPost("{id:int}")]
-        public async Task<IActionResult> ObterPorCodigo(int id)
+
+        [HttpPost("{{id:length(24)}}")]
+        public async Task<IActionResult> Read(string id)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = await _testServices.Read(id);
+            return Ok(serviceResponseDTO);
+        }
+
+        [HttpPut]
+        [Route(nameof(Update))]
+        public async Task<IActionResult> Update([FromBody] TestViewModelUpdate testViewModelUpdate, string id)
+        {
+            TestDTO testDTO = _mapper.Map<TestDTO>(testViewModelUpdate);
+            ServiceResponseDTO<TestDTO> ServiceResponseDTO = await _testServices.Update(testDTO, id);
+            return Ok(ServiceResponseDTO);
+        }
+
+        [HttpDelete("{{id:length(24)}}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            ServiceResponseDTO<TestDTO> serviceResponseDTO = await _testServices.Delete(id);
             return Ok(serviceResponseDTO);
         }
     }

@@ -14,6 +14,7 @@ namespace TransformerAPI.Application.Services
         {
             _transformerBusiness = transformerBusiness;
         }
+
         public async Task<ServiceResponseDTO<TransformerDTO>> Create(TransformerDTO transformerDTO)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();
@@ -43,6 +44,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
+
         public async Task<ServiceResponseDTO<TransformerDTO>> Delete(string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();
@@ -57,6 +59,7 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
+
         public async Task<ServiceResponseDTO<TransformerDTO>> Read(string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = new ServiceResponseDTO<TransformerDTO>();

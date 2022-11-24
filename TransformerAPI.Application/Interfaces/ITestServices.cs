@@ -6,8 +6,8 @@ namespace TransformerAPI.Application.Interfaces
     public interface ITestServices
     {
         Task<ServiceResponseDTO<TestDTO>> Create(TestDTO testDTO);
-        Task<ServiceResponseDTO<TestDTO>> Update(TestDTO testDTO);
-        Task<ServiceResponseDTO<TestDTO>> Delete(int id);
-        Task<ServiceResponseDTO<TestDTO>> Read(int id);
+        Task<ServiceResponseDTO<TestDTO>> Read(string id);
+        Task<ServiceResponseDTO<TestDTO>> Update(TestDTO testDTO, string id);
+        Task<ServiceResponseDTO<TestDTO>> Delete(string id);
     }
 }
