@@ -6,8 +6,8 @@ namespace TransformerAPI.Data.Interfaces
     public interface ITransformerRepository
     {
         Task<Transformer> Create(Transformer transformer);
-        Task<Transformer> Update(Transformer transformer);
-        Task<Transformer> Delete(int id);
-        Task<Transformer> Read(int id);
+        Task<Transformer> Update(Transformer transformer, string id);
+        Task<Transformer> Delete(string id);
+        Task<Transformer> Read(string id);
     }
 }

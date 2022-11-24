@@ -24,19 +24,20 @@ namespace TransformerAPI.Business
             return _mapper.Map<TransformerDTO>(transformer);
         }
 
-        public async Task<TransformerDTO> Update(TransformerDTO transformerDTO)
-        {
+        public async Task<TransformerDTO> Update(TransformerDTO transformerDTO, string id)
+        {            
             Transformer transformer = _mapper.Map<Transformer>(transformerDTO);
-            transformer = await _transformerRepository.Update(transformer);
+            transformer.Id = id;
+            transformer = await _transformerRepository.Update(transformer, id);
             return _mapper.Map<TransformerDTO>(transformer);
         }
-        public async Task<TransformerDTO> Delete(int id)
+        public async Task<TransformerDTO> Delete(string id)
         {
             Transformer transformer = await _transformerRepository.Delete(id);
             TransformerDTO transformerDTO = (transformer != null) ? _mapper.Map<TransformerDTO>(transformer) : new TransformerDTO();
             return transformerDTO;
         }
-        public async Task<TransformerDTO> Read(int id)
+        public async Task<TransformerDTO> Read(string id)
         {
             Transformer transformer = await _transformerRepository.Read(id);
             TransformerDTO transformerDTO = (transformer != null) ? _mapper.Map<TransformerDTO>(transformer) : new TransformerDTO();
