@@ -2,7 +2,7 @@
 
 namespace TransformerAPI.Shared.ViewModel.TestViewModel
 {
-    public class TestViewModelCreate : BaseViewModel
+    public class TestViewModelCreate
     {
         public string Name { get; set; }
         public bool Status { get; set; }

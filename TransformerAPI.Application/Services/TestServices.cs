@@ -16,13 +16,14 @@ namespace TransformerAPI.Application.Services
             _testBusiness = testBusiness;
             _reportBusiness = reportBusiness;
         }
+
         public async Task<ServiceResponseDTO<TestDTO>> Create(TestDTO testDTO)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = new ServiceResponseDTO<TestDTO>();
             try
             {
-                await _reportBusiness.Create(testDTO);
                 serviceResponseDTO.Dados = await _testBusiness.Create(testDTO);
+                await _reportBusiness.Create(testDTO);
             }
             catch (Exception ex)
             {
@@ -32,12 +33,12 @@ namespace TransformerAPI.Application.Services
             return serviceResponseDTO;
         }
 
-        public async Task<ServiceResponseDTO<TestDTO>> Update(TestDTO testDTO)
+        public async Task<ServiceResponseDTO<TestDTO>> Update(TestDTO testDTO, string id)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = new ServiceResponseDTO<TestDTO>();
             try
             {
-                serviceResponseDTO.Dados = await _testBusiness.Update(testDTO);
+                serviceResponseDTO.Dados = await _testBusiness.Update(testDTO, id);
             }
             catch (Exception ex)
             {
@@ -46,7 +47,8 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
-        public async Task<ServiceResponseDTO<TestDTO>> Delete(int id)
+
+        public async Task<ServiceResponseDTO<TestDTO>> Delete(string id)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = new ServiceResponseDTO<TestDTO>();
             try
@@ -60,7 +62,8 @@ namespace TransformerAPI.Application.Services
             }
             return serviceResponseDTO;
         }
-        public async Task<ServiceResponseDTO<TestDTO>> Read(int id)
+
+        public async Task<ServiceResponseDTO<TestDTO>> Read(string id)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = new ServiceResponseDTO<TestDTO>();
             try

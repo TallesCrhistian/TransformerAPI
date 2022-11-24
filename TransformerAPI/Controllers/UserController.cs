@@ -28,6 +28,14 @@ namespace TransformerAPI.Controller
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Create(userDTO);
             return Ok(serviceResponseDTO);
         }
+
+        [HttpPost("{id:length(24)}")]
+        public async Task<IActionResult> Read(string id)
+        {
+            ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Read(id);
+            return Ok(serviceResponseDTO);
+        }
+
         [HttpPut]
         [Route(nameof(Update))]
         public async Task<IActionResult> Update([FromBody] UserViewModelUpdate userViewModelUpdate, string id)
@@ -36,16 +44,11 @@ namespace TransformerAPI.Controller
             ServiceResponseDTO<UserDTO> ServiceResponseDTO = await _userServices.Update(userDTO, id);
             return Ok(ServiceResponseDTO);
         }
+
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Delete(id);
-            return Ok(serviceResponseDTO);
-        }
-        [HttpPost("{id:length(24)}")]
-        public async Task<IActionResult> ObterPorCodigo(string id)
-        {
-            ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Read(id);
             return Ok(serviceResponseDTO);
         }
     }

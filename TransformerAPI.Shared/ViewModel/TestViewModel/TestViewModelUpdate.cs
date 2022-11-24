@@ -4,7 +4,6 @@ namespace TransformerAPI.Shared.ViewModel.TestViewModel
 {
     public class TestViewModelUpdate
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public bool Status { get; set; }
         public DateTime Duration_in_Seconds { get; set; }

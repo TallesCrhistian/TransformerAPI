@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MongoDB.Driver;
+using System.Threading.Tasks;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
 
@@ -6,30 +7,40 @@ namespace TransformerAPI.Data.Repository
 {
     public class TestRepository : ITestRepository
     {
-       
-        public TestRepository()
+        private readonly IMongoCollection<Test> _mongoCollection;
+
+        public TestRepository(ITransformerDatabaseSettings transformerDatabaseSettings)
         {
-            
+            var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
+            var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
+
+            _mongoCollection = database.GetCollection<Test>(transformerDatabaseSettings.TransformerCollectionName);
         }
 
-        public Task<Test> Create(Test test)
+        public async Task<Test> Create(Test test)
         {
-            throw new System.NotImplementedException();
+            await _mongoCollection.InsertOneAsync(test);
+            return test;
         }
 
-        public Task<Test> Delete(int id)
+        public async Task<Test> Read(string id)
         {
-            throw new System.NotImplementedException();
+            Test test = await _mongoCollection.Find<Test>(test => test.Id == id).FirstOrDefaultAsync();
+            return test;
         }
 
-        public Task<Test> Read(int id)
+        public async Task<Test> Update(Test test, string id)
         {
-            throw new System.NotImplementedException();
+            await _mongoCollection.ReplaceOneAsync(test => test.Id == id, test);
+            return test;
         }
 
-        public Task<Test> Update(Test test)
+        public async Task<Test> Delete(string id)
         {
-            throw new System.NotImplementedException();
+            await _mongoCollection.DeleteOneAsync(test => test.Id == id);
+            Test test = new();
+
+            return test;
         }
     }
 }

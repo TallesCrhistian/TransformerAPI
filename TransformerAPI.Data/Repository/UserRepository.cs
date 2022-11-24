@@ -16,11 +16,13 @@ namespace TransformerAPI.Data.Repository
 
             _mongoCollection = database.GetCollection<User>(transformerDatabaseSettings.TransformerCollectionName);
         }
+
         public async Task<User> Create(User user)
         {
             await _mongoCollection.InsertOneAsync(user);
             return user;
         }
+
         public async Task<User> Update(User user, string id)
         {
             await _mongoCollection.ReplaceOneAsync(user => user.Id == id, user);
@@ -41,6 +43,5 @@ namespace TransformerAPI.Data.Repository
             return user;
 
         }
-
     }
 }
