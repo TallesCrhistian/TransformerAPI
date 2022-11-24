@@ -18,23 +18,29 @@ namespace TransformerAPI.Data.Repository
         }
         public async Task<User> Create(User user)
         {
-           await _mongoCollection.InsertOneAsync(user);
+            await _mongoCollection.InsertOneAsync(user);
+            return user;
+        }
+        public async Task<User> Update(User user, string id)
+        {
+            await _mongoCollection.ReplaceOneAsync(user => user.Id == id, user);
             return user;
         }
 
-        public Task<User> Delete(int id)
+        public async Task<User> Delete(string id)
         {
-            throw new System.NotImplementedException();
+            await _mongoCollection.DeleteOneAsync(user => user.Id == id);
+            User user = new User();
+
+            return user;
         }
 
-        public Task<User> Read(int id)
+        public async Task<User> Read(string id)
         {
-            throw new System.NotImplementedException();
+            User user = _mongoCollection.Find<User>(user => user.Id == id).FirstOrDefault();
+            return user;
+
         }
 
-        public Task<User> Update(User user)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
