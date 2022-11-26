@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TransformerAPI.Application.Interfaces;
 using TransformerAPI.Shared.DTOs;
-using TransformerAPI.Shared.Filters;
 using TransformerAPI.Shared.ViewModel.ReportViewModel;
 
 namespace TransformerAPI.Controllers
@@ -24,9 +23,9 @@ namespace TransformerAPI.Controllers
 
         [HttpPost]
         [Route(nameof(List))]
-        public async Task<IActionResult> List([FromBody] ReportFilter reportFilter)
-        {            
-            ServiceResponseDTO<List<ReportDTO>> serviceResponseDTO = await _reportServices.List(reportFilter);
+        public async Task<IActionResult>  List()
+        {
+            ServiceResponseDTO<List<ReportDTO>> serviceResponseDTO = await _reportServices.List();
             return Ok(serviceResponseDTO);
         }
     }

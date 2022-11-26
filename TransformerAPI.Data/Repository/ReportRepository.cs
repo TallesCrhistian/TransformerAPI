@@ -1,21 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
-using TransformerAPI.Shared.Filters;
 
 namespace TransformerAPI.Data.Repository
 {
     public class ReportRepository : IReportRepository
     {
-        public Task<Report> Create(Report report)
+        private readonly IMongoCollection<Report> _mongoCollection;
+
+        public ReportRepository(ITransformerDatabaseSettings transformerDatabaseSettings)
         {
-            throw new System.NotImplementedException();
+            var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
+            var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
+
+            _mongoCollection = database.GetCollection<Report>(transformerDatabaseSettings.TransformerCollectionName);
+        }
+        public async Task<Report> Create(Report report)
+        {
+            await _mongoCollection.InsertOneAsync(report);
+            return report;
         }
 
-        public Task<List<Report>> List(ReportFilter reportFilter)
+        public async Task<List<Report>> List()
         {
-            throw new System.NotImplementedException();
+            List<Report> reports = await _mongoCollection.Find(report => true).ToListAsync();
+            return reports;
         }
     }
 }

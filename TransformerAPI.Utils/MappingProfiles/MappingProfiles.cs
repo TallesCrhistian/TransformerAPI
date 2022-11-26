@@ -42,7 +42,7 @@ namespace TransformerAPI.Utils.MappingProfiles
                 .ReverseMap();
 
             CreateMap<ReportViewModelCreate, ReportDTO>()
-               .ReverseMap();            
+               .ReverseMap();
             CreateMap<ReportViewModel, ReportDTO>()
                 .ReverseMap();
             CreateMap<ReportDTO, Report>()

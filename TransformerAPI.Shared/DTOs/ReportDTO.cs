@@ -3,6 +3,6 @@
     public class ReportDTO : BaseDTO
     {
         public string Name { get; set; }
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }
