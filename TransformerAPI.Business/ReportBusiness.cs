@@ -5,7 +5,6 @@ using TransformerAPI.Business.Interfaces;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Entities;
 using TransformerAPI.Shared.DTOs;
-using TransformerAPI.Shared.Filters;
 
 namespace TransformerAPI.Business
 {
@@ -27,9 +26,9 @@ namespace TransformerAPI.Business
             return _mapper.Map<ReportDTO>(report);
         }
 
-        public async Task<List<ReportDTO>> List(ReportFilter reportFilter)
+        public async Task<List<ReportDTO>> List()
         {
-            List<Report> report = await _reportRepository.List(reportFilter);
+            List<Report> report = await _reportRepository.List();
             List<ReportDTO> reportDTO = _mapper.Map<List<ReportDTO>>(report);
             return reportDTO;
         }
@@ -37,7 +36,6 @@ namespace TransformerAPI.Business
         {
             ReportDTO reportDTO = new ReportDTO();
             reportDTO.Name = testDTO.Name;
-            reportDTO.Status = testDTO.Status;
 
             return reportDTO;
         }
