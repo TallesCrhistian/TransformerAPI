@@ -16,6 +16,7 @@ namespace TransformerAPI.Business
             _userRepository = userRepository;
             _mapper = mapper;
         }
+
         public async Task<UserDTO> Create(UserDTO userDTO)
         {
             User user = _mapper.Map<User>(userDTO);
@@ -30,12 +31,14 @@ namespace TransformerAPI.Business
             user = await _userRepository.Update(user, id);
             return _mapper.Map<UserDTO>(user);
         }
+
         public async Task<UserDTO> Delete(string id)
         {
             User user = await _userRepository.Delete(id);
             UserDTO userDTO = (user != null) ? _mapper.Map<UserDTO>(user) : new UserDTO();
             return userDTO;
         }
+
         public async Task<UserDTO> Read(string id)
         {
             User user = await _userRepository.Read(id);
