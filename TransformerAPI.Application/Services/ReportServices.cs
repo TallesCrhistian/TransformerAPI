@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using TransformerAPI.Application.Interfaces;
 using TransformerAPI.Business.Interfaces;
 using TransformerAPI.Shared.DTOs;
-using TransformerAPI.Shared.Filters;
 
 namespace TransformerAPI.Application.Services
 {
@@ -15,13 +14,13 @@ namespace TransformerAPI.Application.Services
         {
             _reportBusiness = reportBusiness;
         }
-        public async Task<ServiceResponseDTO<List<ReportDTO>>> List(ReportFilter reportFilter)
+        public async Task<ServiceResponseDTO<List<ReportDTO>>> List()
         {
 
             ServiceResponseDTO<List<ReportDTO>> serviceResponseDTO = new ServiceResponseDTO<List<ReportDTO>>();
             try
             {
-                serviceResponseDTO.Dados = await _reportBusiness.List(reportFilter);
+                serviceResponseDTO.Dados = await _reportBusiness.List();
 
             }
             catch (Exception ex)
