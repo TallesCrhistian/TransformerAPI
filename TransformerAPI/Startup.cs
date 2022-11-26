@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using TransformerAPI.Data.Context;
 using TransformerAPI.Utils.MappingProfiles;
 
 namespace TransformerAPI
@@ -18,17 +16,18 @@ namespace TransformerAPI
         public IConfiguration _configuration { get; }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataBase(_configuration);
-            services.AddRepository();            
+            services.AddRepository();
             services.AddBusiness();
             services.AddServices();
-            services.AddControllers();            
+            services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddSwagger();
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

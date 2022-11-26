@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TransformerAPI.Data\TransformerAPI.Data.csproj" />
     <ProjectReference Include="..\TransformerAPI.Entities\TransformerAPI.Entities.csproj" />
     <ProjectReference Include="..\TransformerAPI.Shared\TransformerAPI.Shared.csproj" />
   </ItemGroup>

@@ -14,6 +14,7 @@ namespace TransformerAPI.Application.Services
         {
             _reportBusiness = reportBusiness;
         }
+
         public async Task<ServiceResponseDTO<List<ReportDTO>>> List()
         {
 

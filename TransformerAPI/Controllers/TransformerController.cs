@@ -29,7 +29,7 @@ namespace TransformerAPI.Controllers
             return Ok(serviceResponseDTO);
         }
 
-        [HttpPost("{id:length(24)}")]
+        [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> Read(string id)
         {
             ServiceResponseDTO<TransformerDTO> serviceResponseDTO = await _transformerServices.Read(id);

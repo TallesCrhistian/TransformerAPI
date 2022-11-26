@@ -19,6 +19,7 @@ namespace TransformerAPI.Controllers
             _testServices = testServices;
             _mapper = mapper;
         }
+
         [HttpPost]
         [Route(nameof(Create))]
         public async Task<IActionResult> Create([FromBody] TestViewModelCreate testViewModelCreate)
@@ -28,7 +29,7 @@ namespace TransformerAPI.Controllers
             return Ok(serviceResponseDTO);
         }
 
-        [HttpPost("{{id:length(24)}}")]
+        [HttpGet("{{id:length(24)}}")]
         public async Task<IActionResult> Read(string id)
         {
             ServiceResponseDTO<TestDTO> serviceResponseDTO = await _testServices.Read(id);
