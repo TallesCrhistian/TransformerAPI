@@ -14,7 +14,7 @@ namespace TransformerAPI.Data.Repository
             var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
             var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
 
-            _mongoCollection = database.GetCollection<User>(transformerDatabaseSettings.TransformerCollectionName);
+            _mongoCollection = database.GetCollection<User>(transformerDatabaseSettings.UserCollectionName);
         }
 
         public async Task<User> Create(User user)

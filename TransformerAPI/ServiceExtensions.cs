@@ -2,15 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using MongoDB.Driver;
 using Swashbuckle.AspNetCore.Filters;
-using System;
-using System.Configuration;
 using TransformerAPI.Application.Interfaces;
 using TransformerAPI.Application.Services;
 using TransformerAPI.Business;
 using TransformerAPI.Business.Interfaces;
-using TransformerAPI.Data.Context;
+using TransformerAPI.Utils;
 using TransformerAPI.Data.Interfaces;
 using TransformerAPI.Data.Repository;
 
@@ -28,6 +25,7 @@ namespace TransformerAPI
 
             return services;
         }
+
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserServices, UserServices>();
@@ -57,6 +55,7 @@ namespace TransformerAPI
             services.AddTransient<IReportRepository, ReportRepository>();
             return services;
         }
+
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

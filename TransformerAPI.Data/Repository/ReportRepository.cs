@@ -15,8 +15,9 @@ namespace TransformerAPI.Data.Repository
             var client = new MongoClient(transformerDatabaseSettings.ConnectionString);
             var database = client.GetDatabase(transformerDatabaseSettings.DatabaseName);
 
-            _mongoCollection = database.GetCollection<Report>(transformerDatabaseSettings.TransformerCollectionName);
+            _mongoCollection = database.GetCollection<Report>(transformerDatabaseSettings.ReportCollectionName);
         }
+
         public async Task<Report> Create(Report report)
         {
             await _mongoCollection.InsertOneAsync(report);

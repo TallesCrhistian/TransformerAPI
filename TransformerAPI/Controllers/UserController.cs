@@ -20,6 +20,7 @@ namespace TransformerAPI.Controller
             _userServices = userServices;
             _mapper = mapper;
         }
+
         [HttpPost]
         [Route(nameof(Create))]
         public async Task<IActionResult> Create([FromBody] UserViewModeICreate userViewModeICreate)
@@ -29,7 +30,7 @@ namespace TransformerAPI.Controller
             return Ok(serviceResponseDTO);
         }
 
-        [HttpPost("{id:length(24)}")]
+        [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> Read(string id)
         {
             ServiceResponseDTO<UserDTO> serviceResponseDTO = await _userServices.Read(id);

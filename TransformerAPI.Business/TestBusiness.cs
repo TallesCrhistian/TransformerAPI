@@ -17,6 +17,7 @@ namespace TransformerAPI.Business
             _testRepository = testRepository;
             _mapper = mapper;
         }
+
         public async Task<TestDTO> Create(TestDTO testDTO)
         {
             Test test = _mapper.Map<Test>(testDTO);
@@ -31,12 +32,14 @@ namespace TransformerAPI.Business
             test = await _testRepository.Update(test, id);
             return _mapper.Map<TestDTO>(test);
         }
+
         public async Task<TestDTO> Delete(string id)
         {
             Test test = await _testRepository.Delete(id);
             TestDTO testDTO = (test != null) ? _mapper.Map<TestDTO>(test) : new TestDTO();
             return testDTO;
         }
+
         public async Task<TestDTO> Read(string id)
         {
             Test test = await _testRepository.Read(id);
